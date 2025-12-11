@@ -5,77 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>中肿外院SUSAR处理工具</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Microsoft YaHei', '微软雅黑', 'SimSun', '宋体', Arial, sans-serif;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
             background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             padding: 40px;
         }
-
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 28px;
-        }
-
-        .emoji {
-            text-align: center;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
+        h1 { color: #333; text-align: center; margin-bottom: 10px; font-size: 28px; }
+        .emoji { text-align: center; font-size: 48px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 8px; color: #555; font-weight: 600; }
         input[type="text"] {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s;
         }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: #ff9a56;
-        }
-
-        .file-upload {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
+        input[type="text"]:focus { outline: none; border-color: #ff9a56; }
+        input[type="file"] { display: none; }
         .file-label {
             display: block;
             padding: 15px 20px;
@@ -86,19 +43,8 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
-        .file-label:hover {
-            background: #ffe8dc;
-            border-color: #ff6b6b;
-        }
-
-        .file-name {
-            margin-top: 10px;
-            color: #ff9a56;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
+        .file-label:hover { background: #ffe8dc; border-color: #ff6b6b; }
+        .file-name { margin-top: 10px; color: #ff9a56; font-size: 14px; font-weight: 600; }
         button {
             width: 100%;
             padding: 15px;
@@ -111,43 +57,17 @@
             cursor: pointer;
             transition: transform 0.2s;
         }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
+        button:hover { transform: translateY(-2px); }
+        button:disabled { background: #ccc; cursor: not-allowed; transform: none; }
         .status {
             margin-top: 20px;
             padding: 15px;
             border-radius: 8px;
             display: none;
         }
-
-        .status.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .status.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-
+        .status.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .status.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .loading { display: none; text-align: center; margin-top: 20px; }
         .spinner {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #ff9a56;
@@ -157,12 +77,10 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
         .instructions {
             background: #fff5f0;
             padding: 20px;
@@ -170,36 +88,9 @@
             margin-bottom: 30px;
             border-left: 4px solid #ff9a56;
         }
-
-        .instructions h3 {
-            color: #ff6b6b;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .instructions ul {
-            margin-left: 20px;
-            color: #666;
-            font-size: 14px;
-            line-height: 1.8;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #999;
-            font-size: 12px;
-        }
-
-        .debug-info {
-            margin-top: 15px;
-            padding: 10px;
-            background: #f0f0f0;
-            border-radius: 5px;
-            font-size: 12px;
-            color: #666;
-            display: none;
-        }
+        .instructions h3 { color: #ff6b6b; margin-bottom: 10px; }
+        .instructions ul { margin-left: 20px; color: #666; line-height: 1.8; }
+        .footer { text-align: center; margin-top: 30px; color: #999; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -211,21 +102,20 @@
             <h3>📋 使用说明</h3>
             <ul>
                 <li>输入项目编号（例如：D933SC00001）</li>
-                <li>上传包含 SUSAR 数据的 Excel 文件（.xlsx格式）</li>
-                <li>系统将自动生成 PDF 文件并下载</li>
-                <li>完全保留原始格式（字体、合并单元格等）</li>
+                <li>上传 Excel 文件（.xlsx格式）</li>
+                <li>自动生成 PDF 并下载</li>
             </ul>
         </div>
 
         <div class="form-group">
             <label for="projectId">项目编号 *</label>
-            <input type="text" id="projectId" placeholder="例如: D933SC00001" required>
+            <input type="text" id="projectId" placeholder="例如: D933SC00001">
         </div>
 
         <div class="form-group">
             <label>上传 Excel 文件 *</label>
             <div class="file-upload">
-                <input type="file" id="fileInput" accept=".xlsx" required>
+                <input type="file" id="fileInput" accept=".xlsx">
                 <label for="fileInput" class="file-label">
                     📁 点击选择文件<br>
                     <small style="color: #999;">仅支持 .xlsx 格式</small>
@@ -242,14 +132,15 @@
         </div>
 
         <div class="status" id="status"></div>
-        <div class="debug-info" id="debugInfo"></div>
 
         <div class="footer">
-            <p>中肿外院SUSAR处理工具 v10.1</p>
+            <p>中肿外院SUSAR处理工具 v11.0</p>
         </div>
     </div>
 
     <script>
+        const API_URL = window.location.origin;
+
         document.getElementById('fileInput').addEventListener('change', function(e) {
             const fileName = e.target.files[0]?.name || '';
             document.getElementById('fileName').textContent = fileName ? `已选择: ${fileName}` : '';
@@ -261,7 +152,6 @@
             const statusDiv = document.getElementById('status');
             const loadingDiv = document.getElementById('loading');
             const processBtn = document.getElementById('processBtn');
-            const debugInfo = document.getElementById('debugInfo');
 
             if (!projectId) {
                 showStatus('❌ 请输入项目编号', 'error');
@@ -275,73 +165,78 @@
 
             loadingDiv.style.display = 'block';
             statusDiv.style.display = 'none';
-            debugInfo.style.display = 'none';
             processBtn.disabled = true;
 
             try {
+                // 先测试连接
+                const healthCheck = await fetch(`${API_URL}/api/health`);
+                if (!healthCheck.ok) {
+                    throw new Error('服务器连接失败');
+                }
+
                 const formData = new FormData();
                 formData.append('file', fileInput.files[0]);
                 formData.append('project_id', projectId);
 
-                debugInfo.textContent = '正在上传文件...';
-                debugInfo.style.display = 'block';
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 180000); // 3分钟超时
 
-                const response = await fetch('/api/process', {
+                const response = await fetch(`${API_URL}/api/process`, {
                     method: 'POST',
                     body: formData,
-                    // 增加超时时间
-                    signal: AbortSignal.timeout(120000) // 120秒超时
+                    signal: controller.signal
                 });
 
-                debugInfo.textContent = '服务器处理中...';
+                clearTimeout(timeoutId);
 
                 if (!response.ok) {
-                    let errorMessage = '处理失败';
+                    let errorMsg = '处理失败';
                     try {
-                        const error = await response.json();
-                        errorMessage = error.error || errorMessage;
+                        const errorData = await response.json();
+                        errorMsg = errorData.error || errorMsg;
                     } catch (e) {
-                        errorMessage = `服务器错误 (${response.status})`;
+                        errorMsg = `服务器错误 (${response.status})`;
                     }
-                    throw new Error(errorMessage);
+                    throw new Error(errorMsg);
                 }
-
-                debugInfo.textContent = '正在下载文件...';
 
                 const blob = await response.blob();
+                const disposition = response.headers.get('Content-Disposition');
                 
-                // 获取文件名
-                const contentDisposition = response.headers.get('Content-Disposition');
                 let filename = 'output.pdf';
-                
-                if (contentDisposition) {
-                    const filenameMatch = contentDisposition.match(/filename\*?=['"]?(?:UTF-\d['"]*)?([^;\r\n"']*)['"]?;?/);
-                    if (filenameMatch && filenameMatch[1]) {
-                        filename = decodeURIComponent(filenameMatch[1]);
+                if (disposition) {
+                    const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+                    if (match && match[1]) {
+                        filename = match[1].replace(/['"]/g, '');
+                        try {
+                            filename = decodeURIComponent(filename);
+                        } catch (e) {
+                            // 保持原文件名
+                        }
                     }
                 }
 
-                // 下载文件
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = filename;
                 document.body.appendChild(a);
                 a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
+                
+                setTimeout(() => {
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                }, 100);
 
-                debugInfo.style.display = 'none';
                 showStatus('✅ 处理完成！PDF 文件已自动下载', 'success');
                 
             } catch (error) {
-                debugInfo.style.display = 'none';
-                if (error.name === 'TimeoutError') {
-                    showStatus('❌ 处理超时，文件可能太大或服务器响应慢，请重试', 'error');
+                if (error.name === 'AbortError') {
+                    showStatus('❌ 处理超时，请检查文件大小或重试', 'error');
                 } else {
                     showStatus(`❌ ${error.message}`, 'error');
                 }
-                console.error('详细错误:', error);
+                console.error('错误详情:', error);
             } finally {
                 loadingDiv.style.display = 'none';
                 processBtn.disabled = false;
